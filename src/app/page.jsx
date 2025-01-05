@@ -237,9 +237,26 @@ function MainComponent() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f8fafb] p-6">
+    <div className="min-h-screen p-6 bg-[#FDF6E3]">
       <div className="max-w-7xl mx-auto relative">
-        <div className="absolute top-0 left-0 bg-white p-4 rounded-lg shadow-sm">
+        <header
+          className="relative mb-8 bg-cover bg-center rounded-lg overflow-hidden"
+          style={{
+            backgroundImage:
+              "url('https://ucarecdn.com/bbe1454a-fa9b-414a-a26b-bb4e59237f9c/-/format/auto/')",
+          }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-b from-black/80 to-black/40"></div>
+          <div className="relative z-10 p-8">
+            <h1 className="text-4xl font-bold text-white font-roboto">
+              Sustainable Investment Platform
+            </h1>
+            <p className="text-gray-200 mt-2 font-roboto text-lg">
+              Environmental Investment Analytics
+            </p>
+          </div>
+        </header>
+        <div className="flex justify-between items-center mb-8 bg-[#FDF6E3]/50 p-4 rounded-lg shadow-sm">
           <div className="text-lg font-semibold text-[#1a3547]">
             {currentTime.toLocaleDateString("en-US", {
               weekday: "long",
@@ -248,8 +265,6 @@ function MainComponent() {
               day: "numeric",
             })}
           </div>
-        </div>
-        <div className="absolute top-0 right-0 bg-white p-4 rounded-lg shadow-sm">
           <div className="text-lg font-semibold text-[#1a3547]">
             {currentTime.toLocaleTimeString("en-US", {
               hour: "2-digit",
@@ -257,16 +272,16 @@ function MainComponent() {
               second: "2-digit",
             })}
           </div>
-        </div>
-        <div className="absolute top-20 right-0 bg-white p-4 rounded-lg shadow-sm">
-          <div className="text-sm font-semibold text-[#1a3547]">
-            {currentTime.toLocaleDateString("en-US", {
-              month: "short",
-              year: "numeric",
-            })}
-          </div>
-          <div className="text-3xl font-bold text-[#2563eb]">
-            {currentTime.getDate()}
+          <div className="text-center">
+            <div className="text-sm font-semibold text-[#1a3547]">
+              {currentTime.toLocaleDateString("en-US", {
+                month: "short",
+                year: "numeric",
+              })}
+            </div>
+            <div className="text-3xl font-bold text-[#2563eb]">
+              {currentTime.getDate()}
+            </div>
           </div>
         </div>
         <header className="mb-8">
@@ -312,7 +327,7 @@ function MainComponent() {
           </div>
         </nav>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-white rounded-lg p-6 shadow-sm">
+          <div className="bg-[#FDF6E3]/50 rounded-lg p-6 shadow-sm">
             <div className="flex items-center mb-4">
               <i className="fas fa-chart-line text-[#2563eb] text-xl mr-3"></i>
               <h3 className="font-semibold text-[#1a3547]">
@@ -323,7 +338,7 @@ function MainComponent() {
             <p className="text-[#64748b] text-sm">+3.2% from last month</p>
           </div>
 
-          <div className="bg-white rounded-lg p-6 shadow-sm">
+          <div className="bg-[#FDF6E3]/50 rounded-lg p-6 shadow-sm">
             <div className="flex items-center mb-4">
               <i className="fas fa-coin text-[#2563eb] text-xl mr-3"></i>
               <h3 className="font-semibold text-[#1a3547]">Portfolio Value</h3>
@@ -332,7 +347,7 @@ function MainComponent() {
             <p className="text-[#64748b] text-sm">Across 6 projects</p>
           </div>
 
-          <div className="bg-white rounded-lg p-6 shadow-sm">
+          <div className="bg-[#FDF6E3]/50 rounded-lg p-6 shadow-sm">
             <div className="flex items-center mb-4">
               <i className="fas fa-leaf text-[#2563eb] text-xl mr-3"></i>
               <h3 className="font-semibold text-[#1a3547]">Impact Rating</h3>
@@ -341,7 +356,7 @@ function MainComponent() {
             <p className="text-[#64748b] text-sm">5 High Impact Projects</p>
           </div>
         </div>
-        <div className="bg-white rounded-lg p-6 shadow-sm mb-8">
+        <div className="bg-[#FDF6E3]/50 rounded-lg p-6 shadow-sm mb-8">
           <h2 className="text-xl font-semibold mb-6 text-[#1a3547]">
             Project Overview
           </h2>
@@ -393,7 +408,80 @@ function MainComponent() {
             </table>
           </div>
         </div>
-        <div className="bg-white rounded-lg p-6 shadow-sm mb-8">
+        <div className="bg-[#FDF6E3]/50 rounded-lg p-6 shadow-sm mb-8">
+          <h2 className="text-xl font-semibold mb-6 text-[#1a3547]">
+            Investment Risk Calculator
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-[#1a3547] mb-2">
+                  Select Project
+                </label>
+                <select
+                  className="w-full p-2 border border-[#e2e8f0] rounded-lg"
+                  value={selectedProjectId || ""}
+                  onChange={(e) => setSelectedProjectId(Number(e.target.value))}
+                  name="project"
+                >
+                  <option value="">Choose a project</option>
+                  {projectData.map((project) => (
+                    <option key={project.id} value={project.id}>
+                      {project.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-[#1a3547] mb-2">
+                  Investment Amount ($)
+                </label>
+                <input
+                  type="number"
+                  className="w-full p-2 border border-[#e2e8f0] rounded-lg"
+                  value={investmentAmount}
+                  onChange={(e) => setInvestmentAmount(e.target.value)}
+                  name="amount"
+                  min="0"
+                />
+              </div>
+              <button
+                onClick={calculateReturns}
+                className="w-full bg-[#2563eb] text-white py-2 px-4 rounded-lg hover:bg-[#1d4ed8]"
+                disabled={!selectedProjectId || !investmentAmount}
+              >
+                Calculate Returns
+              </button>
+            </div>
+            <div className="bg-[#f8fafb] p-4 rounded-lg">
+              {calculatedReturns ? (
+                <div className="space-y-4">
+                  <div>
+                    <h3 className="font-semibold text-[#1a3547] mb-2">
+                      Potential Annual Returns
+                    </h3>
+                    <p className="text-2xl font-bold text-green-600">
+                      ${calculatedReturns.profit.toLocaleString()}
+                    </p>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-[#1a3547] mb-2">
+                      Maximum Risk Exposure
+                    </h3>
+                    <p className="text-2xl font-bold text-red-600">
+                      ${calculatedReturns.loss.toLocaleString()}
+                    </p>
+                  </div>
+                </div>
+              ) : (
+                <div className="flex items-center justify-center h-full text-[#64748b]">
+                  Enter investment details to see projected returns and risks
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+        <div className="bg-[#FDF6E3]/50 rounded-lg p-6 shadow-sm mb-8">
           <h2 className="text-xl font-semibold mb-6 text-[#1a3547]">
             ESG Metrics Comparison
           </h2>
@@ -529,7 +617,7 @@ function MainComponent() {
             </div>
           </div>
         </div>
-        <div className="bg-white rounded-lg p-6 shadow-sm mt-8">
+        <div className="bg-[#FDF6E3]/50 rounded-lg p-6 shadow-sm mt-8">
           <h2 className="text-xl font-semibold mb-6 text-[#1a3547]">
             Global Climate Analysis
           </h2>
@@ -574,7 +662,7 @@ function MainComponent() {
                 {climateData?.regions.map((region) => (
                   <div
                     key={region.name}
-                    className="absolute p-2 bg-white rounded shadow-lg text-sm"
+                    className="absolute p-2 bg-[#FDF6E3]/50 rounded shadow-lg text-sm"
                     style={{
                       top:
                         region.name === "North America"
@@ -680,7 +768,7 @@ function MainComponent() {
             </div>
           </div>
         </div>
-        <div className="bg-white rounded-lg p-6 shadow-sm mt-8">
+        <div className="bg-[#FDF6E3]/50 rounded-lg p-6 shadow-sm mt-8">
           <h2 className="text-xl font-semibold mb-6 text-[#1a3547]">
             Regional Investment Analysis
           </h2>
@@ -713,20 +801,9 @@ function MainComponent() {
                       <span>Growth Potential: {suggestions?.potential}</span>
                     </div>
                     <div>
-                      <div className="font-medium mb-2">
-                        Recommended Sectors:
-                      </div>
-                      <div className="flex flex-wrap gap-2">
-                        {suggestions?.sectors.map((sector) => (
-                          <span
-                            key={sector}
-                            className="bg-[#2563eb] bg-opacity-10 text-[#2563eb] px-2 py-1 rounded-full text-sm"
-                          >
-                            {sector}
-                          </span>
-                        ))}
-                      </div>
+                      <div className="font-medium mb-2"></div>
                     </div>
+                    );
                   </div>
                 </div>
               );
